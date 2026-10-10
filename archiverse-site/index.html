@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ArchiVerse</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hind:wght@400;500;600&family=Noto+Serif+Devanagari:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<div id="glow"></div>
+<div id="landing">
+<header class="sticky top-0 z-30 backdrop-blur" style="background:rgba(5,10,20,.88)">
+ <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+  <a href="#" class="flex items-center gap-2"><img id="logo-em" alt="" class="h-10 w-auto"><span class="display text-xl font-bold grad">ArchiVerse</span></a>
+  <nav class="hidden md:flex gap-6 text-sm mute"><a href="#browse" data-i="nav1"></a><a href="#earn" data-i="nav2"></a><a href="#studio" data-i="nav4"></a><a href="#reg" data-i="nav3"></a></nav>
+  <div class="flex items-center gap-2">
+   <div class="seg panel rounded-lg p-1" role="tablist" aria-label="Language"><button id="lang-en" role="tab" onclick="setLang('en')">EN</button><button id="lang-hi" role="tab" onclick="setLang('hi')">हिन्दी</button></div>
+   <button class="ghost text-sm" onclick="openAuth('login')" data-i="login"></button>
+   <button class="btn text-sm hidden sm:block" onclick="openAuth('signup')" data-i="signup"></button>
+  </div>
+ </div>
+</header>
+
+<section class="relative overflow-hidden">
+ <div id="hero-img" class="absolute inset-0" style="background-size:cover;background-position:center right"></div>
+ <canvas id="pts"></canvas><div class="absolute inset-0 bg-gradient-to-r from-[#050a14] via-[#050a14]/85 md:via-[#050a14]/65 to-[#050a14]/25"></div>
+ <div class="relative max-w-6xl mx-auto px-4 pt-16 pb-14 md:pt-28 md:pb-20"><div class="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 w-[360px] lg:w-[460px]"><img id="logo-hero" alt="ArchiVerse logo" class="fl w-full"></div>
+  <p class="inline-block text-sm px-3 py-1 rounded-full panel" style="color:var(--gold)" data-i="badge"></p>
+  <h1 class="display text-4xl sm:text-5xl lg:text-5xl font-bold mt-5 max-w-xl lg:max-w-2xl"><span data-i="h1a"></span> <span class="grad" data-i="h1b"></span></h1>
+  <p class="mt-5 max-w-xl text-lg" style="color:#cfd8e6" data-i="sub"></p>
+  <p class="mt-4 text-xs tracking-[.35em] uppercase" style="color:var(--gold)" data-i="tag"></p>
+  <form class="panel rounded-2xl mt-8 p-3 grid gap-3 md:grid-cols-[1fr_1fr_auto] max-w-xl" onsubmit="runSearch(event)">
+   <select id="q-svc" class="field" aria-label="Service"><option value="all" data-i="o_all"></option><option value="architect" data-i="o_arch"></option><option value="builder" data-i="o_build"></option><option value="land" data-i="o_land"></option><option value="registration" data-i="o_reg"></option></select>
+   <select id="q-city" class="field" aria-label="City"><option value="all" data-i="c_all"></option><option>Noida</option><option>Ghaziabad</option><option>Greater Noida</option><option>Delhi</option></select>
+   <button class="btn" data-i="search"></button>
+  </form>
+  <dl class="mt-10 flex flex-wrap gap-x-10 gap-y-5">
+   <div><dt data-n="2400" data-s="+" class="display text-3xl grad font-bold">2,400+</dt><dd class="text-sm mute" data-i="m1"></dd></div>
+   <div><dt data-n="18900" data-s="" class="display text-3xl grad font-bold">18,900</dt><dd class="text-sm mute" data-i="m2"></dd></div>
+   <div><dt data-n="1150" data-s="" class="display text-3xl grad font-bold">1,150</dt><dd class="text-sm mute" data-i="m3"></dd></div>
+  </dl>
+ </div>
+</section>
+
+<section id="browse" class="max-w-6xl mx-auto px-4 pt-14">
+ <h2 class="display text-2xl font-bold mb-5" data-i="browse"></h2>
+ <div id="tiles" class="grid grid-cols-2 lg:grid-cols-4 gap-3"></div>
+</section>
+
+<section id="studio" class="max-w-6xl mx-auto px-4 pt-14"><div class="panel rounded-2xl p-6 md:p-8">
+ <div class="flex flex-wrap items-end justify-between gap-3"><div><h2 class="display text-3xl font-bold" data-i="g_h"></h2><p class="mt-2 mute max-w-xl" data-i="g_p"></p></div><p id="g-left" class="text-sm px-3 py-1 rounded-full" style="border:1px solid var(--gold);color:var(--gold)"></p></div>
+ <div class="grid lg:grid-cols-[300px_1fr] gap-6 mt-6">
+  <form class="space-y-3" onsubmit="gen(event)">
+   <div class="grid grid-cols-2 gap-3">
+    <label class="block text-sm mute"><span data-i="g_w"></span><input id="g-w" type="number" min="6" max="60" value="12" required class="field mt-1"></label>
+    <label class="block text-sm mute"><span data-i="g_d"></span><input id="g-d" type="number" min="8" max="80" value="18" required class="field mt-1"></label>
+    <label class="block text-sm mute"><span data-i="g_fl"></span><select id="g-fl" class="field mt-1"><option>1</option><option selected>2</option><option>3</option></select></label>
+    <label class="block text-sm mute"><span data-i="g_bd"></span><select id="g-bd" class="field mt-1"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
+   </div>
+   <label class="block text-sm mute"><span data-i="g_st"></span><select id="g-st" class="field mt-1"><option value="mod" data-i="st_mod"></option><option value="cls" data-i="st_cls"></option><option value="vil" data-i="st_vil"></option></select></label>
+   <label class="flex gap-2 items-center"><input id="g-bal" type="checkbox" checked><span data-i="g_bal"></span></label>
+   <label class="flex gap-2 items-center"><input id="g-gar" type="checkbox" checked><span data-i="g_gar"></span></label>
+   <button class="btn w-full" data-i="g_btn"></button>
+  </form>
+  <div><div id="g-view" class="rounded-xl overflow-hidden relative touch-none" style="height:380px;background:linear-gradient(#27456e,#050a14)"><p id="g-empty" class="absolute inset-0 flex items-center justify-center text-center p-6 mute" data-i="g_empty"></p></div>
+   <div id="g-info" class="hide grid sm:grid-cols-[1fr_190px] gap-4 mt-4"><div><div id="g-sum"></div><button type="button" class="ghost mt-3 text-sm" onclick="pick('architect')" data-i="g_hire"></button></div>
+    <figure><div id="g-ref" class="h-28 rounded-lg bg-cover bg-center"></div><figcaption class="text-xs mute mt-1" data-i="g_ref"></figcaption></figure></div></div>
+ </div></div></section>
+<section id="results" class="max-w-6xl mx-auto px-4 py-12">
+ <div class="flex items-end justify-between flex-wrap gap-2 mb-5"><h2 class="display text-2xl font-bold" data-i="res_h"></h2><p id="res-count" class="text-sm mute"></p></div>
+ <div id="grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+</section>
+
+<section id="earn" class="max-w-6xl mx-auto px-4 pb-14">
+ <div class="panel rounded-2xl p-6 md:p-8 grid md:grid-cols-2 gap-8 items-center">
+  <div><h2 class="display text-3xl font-bold" data-i="e_h"></h2><p class="mt-3 mute" data-i="e_p"></p>
+   <p class="mt-4 text-sm" style="color:var(--gold)" data-i="e_note"></p></div>
+  <div><label class="text-sm mute" for="calc" data-i="e_lbl"></label>
+   <input id="calc" type="number" min="0" value="500000" class="field mt-1" oninput="split(+this.value,$('calc-out'))"><div id="calc-out" class="mt-3"></div></div>
+ </div>
+</section>
+
+<section id="reg" class="max-w-6xl mx-auto px-4 pb-16"><div class="panel rounded-2xl p-6 md:p-8">
+ <h2 class="display text-3xl font-bold" data-i="reg_h"></h2><p class="mt-2 mute max-w-2xl" data-i="reg_p"></p>
+ <div class="seg panel rounded-lg p-1 mt-5 max-w-lg" role="tablist"><button id="rt0" role="tab" onclick="regTab(0)" data-i="rt0"></button><button id="rt1" role="tab" onclick="regTab(1)" data-i="rt1"></button><button id="rt2" role="tab" onclick="regTab(2)" data-i="rt2"></button></div>
+ <div id="rp0" class="mt-5"><div id="docs" class="grid sm:grid-cols-2 gap-2"></div><div class="mt-4 h-2 rounded" style="background:var(--slate2)"><div id="dbar" class="h-2 rounded" style="background:linear-gradient(90deg,#e0b565,#b9824a);width:0;transition:width .4s"></div></div><p id="dtxt" class="text-sm mt-2 mute"></p></div>
+ <div id="rp1" class="mt-5 hide grid md:grid-cols-2 gap-6"><div class="space-y-3">
+  <label class="block text-sm mute"><span data-i="c_val"></span><input id="c-val" type="number" min="0" value="5000000" class="field mt-1" oninput="calc()"></label>
+  <label class="block text-sm mute"><span data-i="c_state"></span><select id="c-st" class="field mt-1" onchange="calc()"><option value="UP">Uttar Pradesh</option><option value="DL">Delhi</option><option value="HR">Haryana</option></select></label>
+  <label class="block text-sm mute"><span data-i="c_buyer"></span><select id="c-by" class="field mt-1" onchange="calc()"><option value="m" data-i="c_m"></option><option value="f" data-i="c_f"></option></select></label></div><div id="c-out"></div></div>
+ <div id="rp2" class="mt-5 hide"><form class="grid sm:grid-cols-2 gap-3 max-w-2xl" onsubmit="book(event)"><input required class="field" data-p="ph_name"><input required type="tel" pattern="[0-9]{10}" class="field" data-p="a_phone">
+  <select id="a-off" class="field"><option>Ghaziabad Sub-Registrar</option><option>Noida Sub-Registrar</option><option>Greater Noida Sub-Registrar</option><option>Delhi Sub-Registrar</option></select><input id="a-date" type="date" required class="field">
+  <select id="a-slot" class="field"><option>10:00–11:00</option><option>11:00–12:00</option><option>12:00–13:00</option><option>14:00–15:00</option><option>15:00–16:00</option></select><button class="btn" data-i="a_btn"></button></form><p id="a-res" class="mt-4" style="color:var(--gold)"></p></div>
+</div></section>
+<footer class="text-center text-sm pb-10 mute">© 2026 ArchiVerse · Design · Build · Own</footer>
+</div>
+
+<div id="dash" class="hide max-w-6xl mx-auto px-4 py-6">
+ <div class="flex items-center justify-between flex-wrap gap-3">
+  <div><p class="text-sm mute" id="d-role"></p><h1 class="display text-3xl font-bold grad" id="d-hello"></h1></div>
+  <div class="flex gap-2"><button class="btn" id="d-add" onclick="show('add')" data-i="add_btn"></button><button class="ghost" id="d-lang" onclick="setLang(lang==='en'?'hi':'en')"></button><button class="btn" onclick="logout()" data-i="logout"></button></div>
+ </div>
+ <p id="d-flash" class="mt-4 text-sm" style="color:var(--gold)"></p><div id="d-stats" class="grid gap-4 sm:grid-cols-3 mt-6"></div>
+ <div class="panel rounded-2xl p-6 mt-6"><h2 class="display text-xl font-bold" data-i="d_h"></h2><ul id="d-list" class="mt-4 space-y-2"></ul><p class="text-sm mt-5 mute" data-i="d_note"></p></div>
+</div>
+
+<div id="auth" class="modal" role="dialog" aria-modal="true">
+ <div class="panel rounded-2xl w-full max-w-md p-6 max-h-full overflow-y-auto">
+  <div class="flex justify-between"><h2 id="a-title" class="display text-2xl font-bold"></h2><button onclick="hide('auth')" aria-label="Close" class="text-2xl mute" style="background:none;border:0;cursor:pointer">×</button></div>
+  <div class="roles mt-4" role="tablist">
+   <button id="r-customer" role="tab" onclick="setRole('customer')" data-i="r_cust"></button><button id="r-architect" role="tab" onclick="setRole('architect')" data-i="o_arch"></button>
+   <button id="r-builder" role="tab" onclick="setRole('builder')" data-i="o_build"></button><button id="r-land" role="tab" onclick="setRole('land')" data-i="o_land"></button>
+  </div>
+  <p id="a-desc" class="text-sm mt-3 mute"></p>
+  <form class="mt-4 space-y-3" onsubmit="submitAuth(event)">
+   <input id="f-name" class="field" data-p="ph_name"><input id="f-lic" class="field" data-p="ph_lic">
+   <input id="f-email" type="email" required class="field" data-p="ph_email"><input id="f-pass" type="password" required minlength="6" class="field" data-p="ph_pass">
+   <button class="btn w-full" id="a-submit"></button>
+  </form>
+  <p class="text-sm mt-4 text-center mute"><span id="a-sw-t"></span> <button id="a-sw" onclick="openAuth(mode==='login'?'signup':'login')" style="color:var(--gold);background:none;border:0;cursor:pointer;text-decoration:underline"></button></p>
+  <p class="text-xs mt-3 text-center mute" data-i="demo"></p>
+ </div>
+</div>
+
+<div id="gpay" class="modal" role="dialog" aria-modal="true"><div class="panel rounded-2xl w-full max-w-sm p-6 text-center"><h2 class="display text-2xl font-bold" data-i="gp_h"></h2><p class="mt-3 mute" data-i="gp_p"></p><button class="btn w-full mt-5" onclick="gpay()" data-i="gp_btn"></button><button class="ghost w-full mt-2" onclick="hide('gpay')" data-i="cancel"></button></div></div>
+<div id="add" class="modal" role="dialog" aria-modal="true"><form class="panel rounded-2xl w-full max-w-md p-6 space-y-3" onsubmit="addListing(event)"><h2 class="display text-2xl font-bold" data-i="add_h"></h2><input id="l-t" required class="field" data-p="add_t"><select id="l-c" class="field"><option>Noida</option><option>Ghaziabad</option><option>Greater Noida</option><option>Delhi</option></select><input id="l-p" type="number" min="1" required class="field" data-p="add_p"><input id="l-d" required class="field" data-p="add_d"><div class="flex gap-2"><button class="btn flex-1" data-i="add_go"></button><button type="button" class="ghost" onclick="hide('add')" data-i="cancel"></button></div></form></div>
+<div id="deal" class="modal" role="dialog" aria-modal="true">
+ <div class="panel rounded-2xl w-full max-w-lg overflow-y-auto max-h-full">
+  <div id="m-img" class="h-48 bg-cover bg-center relative"><button onclick="hide('deal')" aria-label="Close" class="absolute top-2 right-3 text-3xl" style="background:none;border:0;color:#fff;cursor:pointer">×</button></div>
+  <div class="p-6">
+   <h2 id="m-name" class="display text-2xl font-bold"></h2><p id="m-meta" class="text-sm mute mt-1"></p><p id="m-desc" class="mt-3"></p>
+   <h3 class="display font-bold mt-5" data-i="m_rev"></h3><div id="m-rev" class="mt-2 space-y-2 text-sm"></div>
+   <label class="text-sm mute block mt-5" for="m-amt" data-i="e_lbl"></label>
+   <input id="m-amt" type="number" min="0" class="field mt-1" oninput="split(+this.value,$('m-out'))"><div id="m-out" class="mt-3"></div>
+   <button class="btn w-full mt-4" onclick="pay()" data-i="pay_btn"></button><button class="ghost w-full mt-2" onclick="$('m-ok').textContent=t('inq')" data-i="m_inq"></button><p id="m-ok" class="mt-3 text-sm" style="color:var(--gold)"></p>
+  </div>
+ </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="app.js"></script></body></html>
